@@ -18,7 +18,7 @@ func get_dictionary():
 		if variable.type == TYPE_ARRAY:
 			dictionary[variable.name] = []
 			for i in self[variable.name].size():
-				if typeof(self[variable.name][i]) == TYPE_OBJECT or typeof(self[variable.name][i]) == TYPE_ARRAY:
+				if typeof(self[variable.name][i]) == TYPE_OBJECT:
 					dictionary[variable.name].append(self[variable.name][i].get_dictionary())
 				else:
 					dictionary[variable.name].append(self[variable.name][i])
