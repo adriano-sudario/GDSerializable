@@ -36,7 +36,6 @@ func save_json(path: String, json_indentation := "\t", sort_json_keys := false):
 
 static func load_from_json(path: String) -> Serializable:
 	if not FileAccess.file_exists(path):
-		push_error('invalid path on trying to load serializable from json: ' + path)
 		return null
 	
 	var json_content = FileAccess.get_file_as_string(path)
