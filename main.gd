@@ -11,26 +11,31 @@ func get_random_weapon() -> Weapon:
 	weapon1.description = "an ordinary weapon"
 	weapon1.damage = 2
 	weapon1.types = ["neutral"] as Array[String]
+	weapon1.slot_size = Vector2(1, 1)
 	
 	var weapon2 = Weapon.new()
 	weapon2.description = "a crazy weapon"
 	weapon2.damage = 4
 	weapon2.types = ["fire", "water"] as Array[String]
+	weapon1.slot_size = Vector2(2, 1)
 	
 	var weapon3 = Weapon.new()
 	weapon3.description = "a very weak weapon"
 	weapon3.damage = 0.1
 	weapon3.types = ["neutral"] as Array[String]
+	weapon1.slot_size = Vector2(1, 1)
 	
 	var weapon4 = Weapon.new()
 	weapon4.description = "a dirty weapon"
 	weapon4.damage = 3
 	weapon4.types = ["earth", "water"] as Array[String]
+	weapon1.slot_size = Vector2(1, 2)
 	
 	var weapon5 = Weapon.new()
 	weapon5.description = "a wet weapon"
 	weapon5.damage = 1
 	weapon5.types = ["water"] as Array[String]
+	weapon1.slot_size = Vector2(1, 1)
 	
 	randomize()
 	var weapons = [weapon1, weapon2, weapon3, weapon4, weapon5]
@@ -81,8 +86,10 @@ func update_label_text():
 					"description": weapon.description.to_upper(),
 					"damage": weapon.damage,
 					"types": weapon.types,
+					"size": weapon.slot_size
 				}
-				text += "- " + ("{description}: {damage} damage of types {types}").format(format) + "\n"
+				text += "- " + ("{description}: {damage} damage of types {types} with size ")\
+					.format(format) + ("%dw / %dh" % [format.size.x, format.size.y]) + "\n"
 		else:
 			text += " (empty)"
 		
