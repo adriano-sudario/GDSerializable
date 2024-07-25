@@ -38,8 +38,8 @@ func get_random_weapon() -> Weapon:
 	weapon5.slot_size = Vector2(1, 1)
 	
 	randomize()
-	var weapons = [weapon1, weapon2, weapon3, weapon4, weapon5]
-	return weapons[randi() % weapons.size()]
+	var weapon = [weapon1, weapon2, weapon3, weapon4, weapon5].pick_random()
+	return weapon
 
 func get_random_weapon_inventory() -> WeaponInventory:
 	var inventory1 = WeaponInventory.new()
@@ -66,8 +66,8 @@ func get_random_weapon_inventory() -> WeaponInventory:
 	inventory3.weapons.append(get_random_weapon())
 	
 	randomize()
-	var inventories = [inventory1, inventory2, inventory3]
-	return inventories[randi() % inventories.size()]
+	var inventory = [inventory1, inventory2, inventory3].pick_random()
+	return inventory
 
 func update_label_text():
 	var weapon_inventory = Serializable.load_from_json(data_path) as WeaponInventory
