@@ -42,6 +42,9 @@ static func is_native_object(value) -> bool:
 		or value_type == TYPE_STRING)
 
 static func fix_values_after_load(loaded_obj) -> void:
+	if not Serializable.is_native_object(loaded_obj):
+		return
+	
 	var variables:Array = Serializable.get_obj_properties(loaded_obj)
 	
 	for variable in variables:
