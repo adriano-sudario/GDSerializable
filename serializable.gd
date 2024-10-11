@@ -21,7 +21,8 @@ func get_properties() -> Array:
 	var property_list:Array = self.get_property_list()
 	
 	for property in property_list:
-		if property.usage != PROPERTY_USAGE_SCRIPT_VARIABLE:
+		var is_enum = property.type and property.class_name != ""
+		if property.usage != PROPERTY_USAGE_SCRIPT_VARIABLE and not is_enum:
 			continue
 		
 		properties.append(property)
@@ -100,6 +101,10 @@ static func load_from_json(path: String) -> Serializable:
 		return null
 	
 	var json_content = FileAccess.get_file_as_string(path)
+	
+	if json_content == "":
+		return null
+	
 	var dictionary = JSON.parse_string(json_content)
 	var loaded_dictionary = dict_to_inst(dictionary)
 	Serializable.fix_values_after_load(loaded_dictionary)
@@ -123,6 +128,10 @@ static func load_from_encrypted(path: String, password:String) -> Serializable:
 		return null
 	
 	var json_content = index_file.get_as_text()
+	
+	if json_content == "":
+		return null
+	
 	index_file.close()
 	var dictionary = JSON.parse_string(json_content)
 	var loaded_dictionary = dict_to_inst(dictionary)
